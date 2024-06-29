@@ -14,13 +14,17 @@ struct ContentView: View {
     @State var showSumView = false
     @State var firstButtonEnable: Bool = true
     @State var secondButtonEnable: Bool = true
+    @State var thirdButtonEnable: Bool = true
     @State var selectedCard = false
     @State var abilityMode = false
     @State var ans: String = ""
     @State var plusHint: String = ""
+    @State var searchHint: String = ""
     @State var plusHintMode = false
+    @State var searchHintMode = false
     @State var indexNumBigSmall = 0
     @State var indexNumPlus = 0
+    @State var indexNumSearch = 0
     @AppStorage("Total") var totalScore = 0
 
 
@@ -47,6 +51,7 @@ struct ContentView: View {
                     })
                     .disabled(firstButtonEnable)
                     .padding(.horizontal, 30)
+
                     // Second
                     Button(action: {
                         plusHintMode = true
@@ -58,14 +63,17 @@ struct ContentView: View {
                     })
                     .disabled(secondButtonEnable)
                     .padding(.horizontal, 30)
+
                     // Third
                     Button(action: {
+                        searchHintMode = true
 
                     }, label: {
-                        Text("+")
+                        Image(systemName: "magnifyingglass")
                             .font(.title)
                             .border(.blue)
                     })
+                    .disabled(thirdButtonEnable)
                     .padding(.horizontal, 30)
                 }
                 LazyVGrid(columns: [
@@ -79,7 +87,7 @@ struct ContentView: View {
                             ZStack {
                                 Button {
                                     // めくる
-                                    if movies[index] == false, abilityMode == false, plusHintMode == false {
+                                    if movies[index] == false, abilityMode == false, plusHintMode == false, searchHintMode == false {
                                         movies[index] = true
                                         if cards[index] != "10" {
                                             sum += Int(cards[index]) ?? 0
@@ -94,10 +102,7 @@ struct ContentView: View {
                                         print(ans)
                                         abilityMode = false
                                     }
-                                    //左縦
-                                    if movies[0] == true, movies[3] == true, movies[6] == true {
-                                        firstButtonEnable = false
-                                    }
+
                                     // Num+
                                     if plusHintMode == true, movies[index] == false {
                                         indexNumPlus = index
@@ -105,8 +110,21 @@ struct ContentView: View {
                                         print(plusHint)
                                         plusHintMode = false
                                     }
+                                    // 🟥Search
+                                    if searchHintMode == true, movies[index] == false {
+                                        indexNumSearch = index
+                                        searchHint = cards[index]
+                                        searchHintMode = false
+                                    }
+                                    //左縦
+                                    if movies[0] == true, movies[3] == true, movies[6] == true {
+                                        firstButtonEnable = false
+                                    }
                                     if movies[1] == true, movies[4] == true, movies[7] == true {
                                         secondButtonEnable = false
+                                    }
+                                    if movies[2] == true, movies[5] == true, movies[8] == true {
+                                        thirdButtonEnable = false
                                     }
                                 } label: {
 
@@ -120,20 +138,28 @@ struct ContentView: View {
                                         Image("back") // back
                                     })
                                 }
-                                if ans == ">" || ans == "<" {
+                                if ans != "" {
                                     if index == indexNumBigSmall {
                                         Text(ans)
                                             .font(.title)
-                                            .foregroundStyle(.red)
-                                            .border(.red)
+                                            .foregroundStyle(.blue)
+                                            .border(.blue)
                                     }
                                 }
                                 if plusHint != "" {
                                     if index == indexNumPlus {
                                         Text(plusHint)
                                             .font(.title)
-                                            .foregroundStyle(.red)
-                                            .border(.red)
+                                            .foregroundStyle(.blue)
+                                            .border(.blue)
+                                    }
+                                }
+                                if searchHint != "" {
+                                    if index == indexNumSearch {
+                                        Text(searchHint)
+                                            .font(.title)
+                                            .foregroundStyle(.blue)
+                                            .border(.blue)
                                     }
                                 }
                             }
@@ -185,9 +211,19 @@ struct ContentView: View {
             } else {
                 returnString = "<"
             }
-        } else {
-            print("Alert")
+        } else if index == 1 || index == 4 || index == 7 {
+                if cards[index] > cards[index+1] {
+                    returnString = ">"
 
+                } else {
+                    returnString = "<"
+                }
+        } else if index == 2 || index == 5 || index == 8 {
+                if cards[index-1] < cards[index] {
+                    returnString = "<"
+                } else {
+                    returnString = ">"
+                }
         }
         return returnString
     }
