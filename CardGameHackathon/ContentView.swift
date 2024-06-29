@@ -12,14 +12,15 @@ struct ContentView: View {
     @State var movies: [Bool] = Array(repeating: false, count: 9)
     @State var sum = 0
     @State var showSumView = false
-    @State var firstButtonEnable: Bool = true
-    @State var secondButtonEnable: Bool = true
-    @State var thirdButtonEnable: Bool = true
+    @State var showJockerView = false
     @State var selectedCard = false
-    @State var abilityMode = false
     @State var ans: String = ""
     @State var plusHint: String = ""
     @State var searchHint: String = ""
+    @State var firstButtonEnable: Bool = true
+    @State var secondButtonEnable: Bool = true
+    @State var thirdButtonEnable: Bool = true
+    @State var abilityMode = false
     @State var plusHintMode = false
     @State var searchHintMode = false
     @State var indexNumBigSmall = 0
@@ -92,7 +93,15 @@ struct ContentView: View {
                                         if cards[index] != "10" {
                                             sum += Int(cards[index]) ?? 0
                                         } else {
-                                            showSumView = true
+                                            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                                            showJockerView = true
+                                        }
+                                            // 全部trueかどうか🟥
+
+                                            DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+                                                showJockerView = false
+                                                showSumView = true
+                                            }
                                         }
                                     }
                                     // <>
@@ -132,10 +141,13 @@ struct ContentView: View {
                                          front: {
                                         Image("card\(cards[index])") // front
                                             .resizable()
+                                            .frame(width: 120, height: 160)
 
                                     },
                                          back: {
                                         Image("back") // back
+                                            .resizable()
+                                            .frame(width: 120, height: 160)
                                     })
                                 }
                                 if ans != "" {
@@ -163,19 +175,23 @@ struct ContentView: View {
                                     }
                                 }
                             }
+
                         }
                     }
                 })
             }
-            .fullScreenCover(isPresented: $showSumView, onDismiss: {
-                totalScore += sum
-                reset()
-
-            }, content: {
-                ScoreView(sum: $sum)
-            })
-            .padding()
+            if showJockerView == true {
+                Image("jocker")
+                    .resizable()
+                    .scaledToFill()
+            }
         }
+        .fullScreenCover(isPresented: $showSumView, onDismiss: {
+            totalScore += sum
+            reset()
+        }, content: {
+            ScoreView(sum: $sum, movies: $movies)
+        })
         .onAppear(perform: {
             cards.shuffle()
             print("cards\(cards)")
@@ -185,6 +201,20 @@ struct ContentView: View {
         movies = Array(repeating: false, count: 9)
         cards.shuffle()
         sum = 0
+        firstButtonEnable = true
+        secondButtonEnable = true
+        thirdButtonEnable = true
+        abilityMode = false
+        plusHintMode = false
+        searchHintMode = false
+        searchHintMode = false
+        indexNumBigSmall = 0
+        indexNumPlus = 0
+        indexNumSearch = 0
+        ans = ""
+    plusHint = ""
+    searchHint = ""
+
         print(cards)
     }
     //add

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ScoreView: View {
     @Binding var sum: Int
+    @Binding var movies: [Bool]
     @AppStorage("Total") var totalScore: Int?
     @Environment(\.dismiss) private var dismiss
     var body: some View {
@@ -18,8 +19,11 @@ struct ScoreView: View {
             if let totalScore = totalScore {
                 Text("Total Score: \(totalScore + sum)")
             }
-            Button("次へ") {
-                dismiss()
+            Button("Next") {
+                 movies = Array(repeating: false, count: 9)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                    dismiss()
+                }
             }
         }
     }
