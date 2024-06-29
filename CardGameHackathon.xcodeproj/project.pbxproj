@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		534B9DF72C2CCFDB00EE46A5 /* ScoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534B9DF62C2CCFDB00EE46A5 /* ScoreView.swift */; };
 		5350D6812C21B140003012A8 /* CardGameHackathonApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5350D6802C21B13F003012A8 /* CardGameHackathonApp.swift */; };
 		5350D6832C21B140003012A8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5350D6822C21B140003012A8 /* ContentView.swift */; };
 		5350D6852C21B141003012A8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5350D6842C21B141003012A8 /* Assets.xcassets */; };
@@ -15,6 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		534B9DF62C2CCFDB00EE46A5 /* ScoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreView.swift; sourceTree = "<group>"; };
 		5350D67D2C21B13F003012A8 /* CardGameHackathon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CardGameHackathon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5350D6802C21B13F003012A8 /* CardGameHackathonApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardGameHackathonApp.swift; sourceTree = "<group>"; };
 		5350D6822C21B140003012A8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -58,6 +60,7 @@
 				5350D6842C21B141003012A8 /* Assets.xcassets */,
 				5350D6862C21B141003012A8 /* Preview Content */,
 				538E5F642C28CB6800065D5B /* FlipView.swift */,
+				534B9DF62C2CCFDB00EE46A5 /* ScoreView.swift */,
 			);
 			path = CardGameHackathon;
 			sourceTree = "<group>";
@@ -141,6 +144,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5350D6832C21B140003012A8 /* ContentView.swift in Sources */,
+				534B9DF72C2CCFDB00EE46A5 /* ScoreView.swift in Sources */,
 				538E5F652C28CB6800065D5B /* FlipView.swift in Sources */,
 				5350D6812C21B140003012A8 /* CardGameHackathonApp.swift in Sources */,
 			);
