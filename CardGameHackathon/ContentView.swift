@@ -13,6 +13,7 @@ struct ContentView: View {
     @State var sum = 0
     @State var showSumView = false
     @State var showJockerView = false
+    @State var showSuccessView = false
     @State var selectedCard = false
     @State var ans: String = ""
     @State var plusHint: String = ""
@@ -26,6 +27,7 @@ struct ContentView: View {
     @State var indexNumBigSmall = 0
     @State var indexNumPlus = 0
     @State var indexNumSearch = 0
+    @State var isSuccess = true
     @AppStorage("Total") var totalScore = 0
 
 
@@ -35,35 +37,37 @@ struct ContentView: View {
                 .ignoresSafeArea()
             VStack {
                 Text("This Game Score:\(sum)")
-                    .font(.title2)
+                    .font(.largeTitle)
+                    .padding(.bottom, 8)
                 if abilityMode == true, plusHintMode == true {
                     Text("Please chose open card.")
                         .foregroundStyle(.red)
                 }
                 HStack {
+                    Spacer()
                     // First
                     Button(action: {
                         abilityMode = true
 
                     }, label: {
                         Text("<>")
-                            .border(.blue)
-                            .font(.title)
+                            .border(.primary)
+                            .font(.largeTitle)
                     })
                     .disabled(firstButtonEnable)
-                    .padding(.horizontal, 30)
+                    Spacer()
 
                     // Second
                     Button(action: {
                         plusHintMode = true
 
                     }, label: {
-                        Text("+")
-                            .border(.blue)
-                            .font(.title)
+                        Image(systemName: "plus")
+                            .border(.primary)
+                            .font(.largeTitle)
                     })
                     .disabled(secondButtonEnable)
-                    .padding(.horizontal, 30)
+                    Spacer()
 
                     // Third
                     Button(action: {
@@ -71,11 +75,11 @@ struct ContentView: View {
 
                     }, label: {
                         Image(systemName: "magnifyingglass")
-                            .font(.title)
-                            .border(.blue)
+                            .font(.largeTitle)
+                            .border(.primary)
                     })
                     .disabled(thirdButtonEnable)
-                    .padding(.horizontal, 30)
+                    Spacer()
                 }
                 LazyVGrid(columns: [
                     GridItem(.flexible()),
@@ -93,11 +97,17 @@ struct ContentView: View {
                                         if cards[index] != "10" {
                                             sum += Int(cards[index]) ?? 0
                                         } else {
-                                            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                                            showJockerView = true
-                                        }
+                                            movies.forEach { bool in
+                                                if bool == false {
+                                                    isSuccess = false
+                                                }
+                                            }
+                                            if isSuccess == false {
+                                                    showJockerView = true
+                                            } else {
+                                                    showSuccessView = true
+                                            }
                                             // 全部trueかどうか🟥
-
                                             DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
                                                 showJockerView = false
                                                 showSumView = true
@@ -154,24 +164,33 @@ struct ContentView: View {
                                     if index == indexNumBigSmall {
                                         Text(ans)
                                             .font(.title)
-                                            .foregroundStyle(.blue)
-                                            .border(.blue)
+                                            .foregroundStyle(.white)
+                                            .padding()
+                                            .frame(width: 70, height: 70)
+                                            .background(.blue)
+                                            .clipShape(RoundedRectangle(cornerRadius: 12))
                                     }
                                 }
                                 if plusHint != "" {
                                     if index == indexNumPlus {
                                         Text(plusHint)
                                             .font(.title)
-                                            .foregroundStyle(.blue)
-                                            .border(.blue)
+                                            .foregroundStyle(.white)
+                                            .padding()
+                                            .frame(width: 70, height: 70)
+                                            .background(.blue)
+                                            .clipShape(RoundedRectangle(cornerRadius: 12))
                                     }
                                 }
                                 if searchHint != "" {
                                     if index == indexNumSearch {
                                         Text(searchHint)
                                             .font(.title)
-                                            .foregroundStyle(.blue)
-                                            .border(.blue)
+                                            .foregroundStyle(.white)
+                                            .padding()
+                                            .frame(width: 70, height: 70)
+                                            .background(.blue)
+                                            .clipShape(RoundedRectangle(cornerRadius: 12))
                                     }
                                 }
                             }
@@ -184,6 +203,12 @@ struct ContentView: View {
                 Image("jocker")
                     .resizable()
                     .scaledToFill()
+            }
+            if showSuccessView == true {
+                Image("success")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(maxWidth: .infinity)
             }
         }
         .fullScreenCover(isPresented: $showSumView, onDismiss: {

@@ -15,15 +15,29 @@ struct ScoreView: View {
     var body: some View {
         VStack {
             Text("This Game Score: \(sum)")
-                .font(.title)
+                .font(.largeTitle)
             if let totalScore = totalScore {
                 Text("Total Score: \(totalScore + sum)")
+                    .font(.title)
             }
-            Button("Next") {
-                 movies = Array(repeating: false, count: 9)
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                    dismiss()
-                }
+            Image("score")
+                .resizable()
+                .scaledToFit()
+                .frame(maxWidth: .infinity)
+            Button {
+                movies = Array(repeating: false, count: 9)
+               DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                   dismiss()
+               }
+            } label: {
+                Text("Next")
+                    .fontWeight(.bold)
+                    .tint(.white)
+                    .padding()
+                    .frame(minWidth: 140, minHeight: 60)
+                    .background(.primary)
+                    .clipShape(RoundedRectangle(cornerRadius: 12))
+                    .padding(.horizontal)
             }
         }
     }
