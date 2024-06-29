@@ -39,10 +39,6 @@ struct ContentView: View {
                 Text("This Game Score:\(sum)")
                     .font(.largeTitle)
                     .padding(.bottom, 8)
-                if abilityMode == true, plusHintMode == true {
-                    Text("Please chose open card.")
-                        .foregroundStyle(.red)
-                }
                 HStack {
                     Spacer()
                     // First
@@ -198,6 +194,16 @@ struct ContentView: View {
                         }
                     }
                 })
+                if abilityMode == true {
+                    Text("Tap on a flipped card.")
+                        .foregroundStyle(.red)
+                        .font(.title3)
+                }
+                if plusHintMode == true || searchHintMode == true {
+                    Text("Tap on an unflipped card.")
+                        .foregroundStyle(.red)
+                        .font(.title3)
+                }
             }
             if showJockerView == true {
                 Image("jocker")
