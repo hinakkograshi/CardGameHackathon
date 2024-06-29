@@ -105,6 +105,7 @@ struct ContentView: View {
                                             }
                                             // 全部trueかどうか🟥
                                             DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+                                                showSuccessView = false
                                                 showJockerView = false
                                                 showSumView = true
                                             }
@@ -190,7 +191,6 @@ struct ContentView: View {
                                     }
                                 }
                             }
-
                         }
                     }
                 })
