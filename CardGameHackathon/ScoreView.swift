@@ -18,7 +18,7 @@ struct ScoreView: View {
                 .font(.largeTitle)
             if let totalScore = totalScore {
                 Text("Total Score: \(totalScore + sum)")
-                    .font(.title)
+                    .font(.title3)
             }
             Image("score")
                 .resizable()
