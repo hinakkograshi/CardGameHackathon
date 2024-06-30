@@ -26,9 +26,9 @@ struct ScoreView: View {
                 .frame(maxWidth: .infinity)
             Button {
                 movies = Array(repeating: false, count: 9)
-               DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                   dismiss()
-               }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                    dismiss()
+                }
             } label: {
                 Text("Next")
                     .fontWeight(.bold)
@@ -43,7 +43,8 @@ struct ScoreView: View {
     }
 }
 
-//#Preview {
-//    @State var sum = 10
-//    ScoreView(sum: $sum)
-//}
+#Preview {
+    @State var sum = 10
+    @State var movies = [false,false]
+    return ScoreView(sum: $sum, movies: $movies)
+}
