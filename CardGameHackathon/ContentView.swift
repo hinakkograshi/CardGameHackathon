@@ -241,9 +241,11 @@ struct ContentView: View {
         indexNumBigSmall = 0
         indexNumPlus = 0
         indexNumSearch = 0
+        isSuccess = true
         ans = ""
         plusHint = ""
         searchHint = ""
+        print("cards\(cards)")
     }
     //add
     func chooseRandomValue(index: Int) -> String {
