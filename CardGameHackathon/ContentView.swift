@@ -14,7 +14,6 @@ struct ContentView: View {
     @State var showSumView = false
     @State var showJockerView = false
     @State var showSuccessView = false
-    @State var selectedCard = false
     @State var ans: String = ""
     @State var plusHint: String = ""
     @State var searchHint: String = ""
@@ -99,9 +98,9 @@ struct ContentView: View {
                                                 }
                                             }
                                             if isSuccess == false {
-                                                    showJockerView = true
+                                                showJockerView = true
                                             } else {
-                                                    showSuccessView = true
+                                                showSuccessView = true
                                             }
                                             // 全部trueかどうか🟥
                                             DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
@@ -243,10 +242,8 @@ struct ContentView: View {
         indexNumPlus = 0
         indexNumSearch = 0
         ans = ""
-    plusHint = ""
-    searchHint = ""
-
-        print(cards)
+        plusHint = ""
+        searchHint = ""
     }
     //add
     func chooseRandomValue(index: Int) -> String {
@@ -273,18 +270,18 @@ struct ContentView: View {
                 returnString = "<"
             }
         } else if index == 1 || index == 4 || index == 7 {
-                if cards[index] > cards[index+1] {
-                    returnString = ">"
+            if cards[index] > cards[index+1] {
+                returnString = ">"
 
-                } else {
-                    returnString = "<"
-                }
+            } else {
+                returnString = "<"
+            }
         } else if index == 2 || index == 5 || index == 8 {
-                if cards[index-1] < cards[index] {
-                    returnString = "<"
-                } else {
-                    returnString = ">"
-                }
+            if cards[index-1] < cards[index] {
+                returnString = "<"
+            } else {
+                returnString = ">"
+            }
         }
         return returnString
     }
