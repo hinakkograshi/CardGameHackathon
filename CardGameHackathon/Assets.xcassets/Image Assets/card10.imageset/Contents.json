@@ -1,17 +1,15 @@
 {
   "images" : [
     {
-      "filename" : "card10.png",
+      "filename" : "black_joker.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "card10@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "card10@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
