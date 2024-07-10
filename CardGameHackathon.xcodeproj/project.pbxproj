@@ -57,10 +57,10 @@
 			children = (
 				5350D6802C21B13F003012A8 /* CardGameHackathonApp.swift */,
 				5350D6822C21B140003012A8 /* ContentView.swift */,
+				534B9DF62C2CCFDB00EE46A5 /* ScoreView.swift */,
+				538E5F642C28CB6800065D5B /* FlipView.swift */,
 				5350D6842C21B141003012A8 /* Assets.xcassets */,
 				5350D6862C21B141003012A8 /* Preview Content */,
-				538E5F642C28CB6800065D5B /* FlipView.swift */,
-				534B9DF62C2CCFDB00EE46A5 /* ScoreView.swift */,
 			);
 			path = CardGameHackathon;
 			sourceTree = "<group>";

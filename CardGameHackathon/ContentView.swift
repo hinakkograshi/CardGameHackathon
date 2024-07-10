@@ -27,6 +27,7 @@ struct ContentView: View {
     @State var indexNumPlus = 0
     @State var indexNumSearch = 0
     @State var isSuccess = true
+    @State var endGame = false
     @AppStorage("Total") var totalScore = 0
 
 
@@ -98,12 +99,14 @@ struct ContentView: View {
                                                 }
                                             }
                                             if isSuccess == false {
-                                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                                endGame = true
+                                                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                                                     showJokerView = true
                                                 }
                                             } else {
-                                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                                                    showSuccessView = true
+                                                endGame = true
+                                                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                                                    showJokerView = true
                                                 }
                                             }
                                             // 全部trueかどうか🟥
@@ -146,7 +149,6 @@ struct ContentView: View {
                                         thirdButtonEnable = false
                                     }
                                 } label: {
-
                                     Flip(isFront: movies[index],
                                          front: {
                                         Image("card\(cards[index])") // front
@@ -160,6 +162,7 @@ struct ContentView: View {
                                             .frame(width: 120, height: 160)
                                     })
                                 }
+                                .disabled(endGame)
                                 if ans != "" {
                                     if index == indexNumBigSmall {
                                         Text(ans)
@@ -234,6 +237,7 @@ struct ContentView: View {
     func reset() {
         movies = Array(repeating: false, count: 9)
         cards.shuffle()
+        endGame = false
         sum = 0
         firstButtonEnable = true
         secondButtonEnable = true
