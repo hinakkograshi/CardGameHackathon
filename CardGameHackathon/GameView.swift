@@ -200,7 +200,7 @@ struct GameView: View {
                                     }
                                 }
                                 if isLev1 == true , index == 0 || index == 5 || index == 7 {
-                                        Text(String(cards[index]))
+                                        Text(levHintValue(index: index))
                                             .font(.title)
                                             .foregroundStyle(.white)
                                             .padding()
@@ -209,7 +209,7 @@ struct GameView: View {
                                             .clipShape(RoundedRectangle(cornerRadius: 12))
                                 }
                                 if isLev2 == true , index == 3 || index == 5 {
-                                        Text(String(cards[index]))
+                                        Text(levHintValue(index: index))
                                             .font(.title)
                                             .foregroundStyle(.white)
                                             .padding()
@@ -277,6 +277,20 @@ struct GameView: View {
         print("cards\(cards)")
     }
     //add
+    func levHintValue(index: Int) -> String {
+        let number = cards[index]
+        var smallNumber = 0
+        if number >= 8 {
+            smallNumber = 8
+        } else if number >= 4 {
+            smallNumber = number - 2
+        } else if number == 2 || number == 3 {
+            smallNumber = 2
+        }
+        let hintString = "\(smallNumber)+"
+        return hintString
+    }
+
     func chooseRandomValue(index: Int) -> String {
         let number = cards[index]
         var smallNumber = 0
