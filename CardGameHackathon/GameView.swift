@@ -10,7 +10,6 @@ import SwiftUI
 struct GameView: View {
     @Binding var isLev1: Bool
     @Binding var isLev2: Bool
-//    @Binding var isLev3: Bool
     @State var cards = [2, 3, 4, 5, 6, 7, 8, 9, 10]
     @State var movies: [Bool] = Array(repeating: false, count: 9)
     @State var sum = 0
@@ -32,7 +31,6 @@ struct GameView: View {
     @State var isSuccess = true
     @State var endGame = false
     @AppStorage("Total") var totalScore = 0
-
 
     var body: some View {
         ZStack {
@@ -103,11 +101,13 @@ struct GameView: View {
                                             }
                                             if isSuccess == false {
                                                 endGame = true
+                                                totalScore += sum
                                                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                                                     showJokerView = true
                                                 }
                                             } else {
                                                 endGame = true
+                                                totalScore += sum
                                                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                                                     showSuccessView = true
                                                 }
@@ -208,7 +208,7 @@ struct GameView: View {
                                             .background(.blue)
                                             .clipShape(RoundedRectangle(cornerRadius: 12))
                                 }
-                                if isLev2 == true , index == 3 || index == 5 {
+                                if isLev2 == true , index == 3 || index == 8 {
                                         Text(levHintValue(index: index))
                                             .font(.title)
                                             .foregroundStyle(.white)
@@ -245,10 +245,9 @@ struct GameView: View {
             }
         }
         .fullScreenCover(isPresented: $showSumView, onDismiss: {
-            totalScore += sum
             reset()
         }, content: {
-            ScoreView(sum: $sum, movies: $movies)
+            ScoreView(isLev1: $isLev1, isLev2: $isLev2, cards: $cards, sum: $sum, movies: $movies)
         })
         .onAppear(perform: {
             cards.shuffle()
@@ -256,8 +255,6 @@ struct GameView: View {
         })
     }
     func reset() {
-        movies = Array(repeating: false, count: 9)
-        cards.shuffle()
         endGame = false
         sum = 0
         firstButtonEnable = true
@@ -283,7 +280,7 @@ struct GameView: View {
         if number >= 8 {
             smallNumber = 8
         } else if number >= 4 {
-            smallNumber = number - 2
+            smallNumber = number - 1
         } else if number == 2 || number == 3 {
             smallNumber = 2
         }
@@ -337,6 +334,5 @@ struct GameView: View {
 #Preview {
     @State var isLev1 = false
     @State var isLev2 = false
-    @State var isLev3 = false
     return GameView(isLev1: $isLev1, isLev2: $isLev2)
 }

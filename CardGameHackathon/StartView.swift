@@ -12,16 +12,15 @@ struct StartView: View {
     @State var showGameView = false
     @State var isLev1 = false
     @State var isLev2 = false
-//    @State var isLev3 = false
     var body: some View {
-        VStack {
+        VStack(spacing: 10){
             Text("Game Start")
                 .font(.largeTitle)
             Image("score")
                 .resizable()
                 .scaledToFit()
                 .frame(maxWidth: .infinity)
-            Text("下のボタンからレベルを選んで\nゲームを開始しまよう！")
+            Text("下のボタンからレベルを選んで\nゲームを開始しましょう！").multilineTextAlignment(.center)
                 .font(.title3)
             Button {
                 showGameView = true
@@ -36,7 +35,6 @@ struct StartView: View {
                     .clipShape(RoundedRectangle(cornerRadius: 12))
                     .padding(.horizontal)
             }
-
             Button {
                 showGameView = true
                 isLev2 = true
@@ -51,10 +49,8 @@ struct StartView: View {
                     .padding(.horizontal)
                     .foregroundStyle(.green)
             }
-
             Button {
                 showGameView = true
-//                isLev3 = true
             } label: {
                 Text("Lv.3 Game Start")
                     .fontWeight(.bold)
