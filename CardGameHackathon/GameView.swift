@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct GameView: View {
+    @Binding var isLev1: Bool
+    @Binding var isLev2: Bool
+    @Binding var isLev3: Bool
     @State var cards = [2, 3, 4, 5, 6, 7, 8, 9, 10]
     @State var movies: [Bool] = Array(repeating: false, count: 9)
     @State var sum = 0
@@ -300,5 +303,8 @@ struct GameView: View {
 }
 
 #Preview {
-    GameView()
+    @State var isLev1 = false
+    @State var isLev2 = false
+    @State var isLev3 = false
+    return GameView(isLev1: $isLev1, isLev2: $isLev2, isLev3: $isLev3)
 }

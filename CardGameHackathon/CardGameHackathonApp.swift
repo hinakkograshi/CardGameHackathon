@@ -11,7 +11,7 @@ import SwiftUI
 struct CardGameHackathonApp: App {
     var body: some Scene {
         WindowGroup {
-            GameView()
+            StartView()
         }
     }
 }

@@ -20,7 +20,7 @@ struct ScoreView: View {
                 Text("Total Score: \(totalScore + sum)")
                     .font(.title3)
             }
-            Image("score")
+            Image("success")
                 .resizable()
                 .scaledToFit()
                 .frame(maxWidth: .infinity)
