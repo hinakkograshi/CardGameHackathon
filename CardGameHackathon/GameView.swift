@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct GameView: View {
     @State var cards = [2, 3, 4, 5, 6, 7, 8, 9, 10]
     @State var movies: [Bool] = Array(repeating: false, count: 9)
     @State var sum = 0
@@ -300,5 +300,5 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    GameView()
 }
