@@ -15,7 +15,7 @@ struct StartView: View {
     var body: some View {
         VStack(spacing: 10){
             Text("Game Start")
-                .font(.largeTitle)
+                .font(.system(size: 50, weight: .black))
             Image("score")
                 .resizable()
                 .scaledToFit()
