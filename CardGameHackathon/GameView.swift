@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct GameView: View {
+    @Binding var isLev1: Bool
+    @Binding var isLev2: Bool
     @State var cards = [2, 3, 4, 5, 6, 7, 8, 9, 10]
     @State var movies: [Bool] = Array(repeating: false, count: 9)
     @State var sum = 0
@@ -29,7 +31,6 @@ struct GameView: View {
     @State var isSuccess = true
     @State var endGame = false
     @AppStorage("Total") var totalScore = 0
-
 
     var body: some View {
         ZStack {
@@ -100,13 +101,15 @@ struct GameView: View {
                                             }
                                             if isSuccess == false {
                                                 endGame = true
+                                                totalScore += sum
                                                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                                                     showJokerView = true
                                                 }
                                             } else {
                                                 endGame = true
+                                                totalScore += sum
                                                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                                                    showJokerView = true
+                                                    showSuccessView = true
                                                 }
                                             }
                                             // 全部trueかどうか🟥
@@ -196,6 +199,24 @@ struct GameView: View {
                                             .clipShape(RoundedRectangle(cornerRadius: 12))
                                     }
                                 }
+                                if isLev1 == true , index == 0 || index == 5 || index == 7 {
+                                        Text(levHintValue(index: index))
+                                            .font(.title)
+                                            .foregroundStyle(.white)
+                                            .padding()
+                                            .frame(width: 70, height: 70)
+                                            .background(.blue)
+                                            .clipShape(RoundedRectangle(cornerRadius: 12))
+                                }
+                                if isLev2 == true , index == 3 || index == 8 {
+                                        Text(levHintValue(index: index))
+                                            .font(.title)
+                                            .foregroundStyle(.white)
+                                            .padding()
+                                            .frame(width: 70, height: 70)
+                                            .background(.blue)
+                                            .clipShape(RoundedRectangle(cornerRadius: 12))
+                                }
                             }
                         }
                     }
@@ -224,10 +245,9 @@ struct GameView: View {
             }
         }
         .fullScreenCover(isPresented: $showSumView, onDismiss: {
-            totalScore += sum
             reset()
         }, content: {
-            ScoreView(sum: $sum, movies: $movies)
+            ScoreView(isLev1: $isLev1, isLev2: $isLev2, cards: $cards, sum: $sum, movies: $movies)
         })
         .onAppear(perform: {
             cards.shuffle()
@@ -235,8 +255,6 @@ struct GameView: View {
         })
     }
     func reset() {
-        movies = Array(repeating: false, count: 9)
-        cards.shuffle()
         endGame = false
         sum = 0
         firstButtonEnable = true
@@ -256,6 +274,20 @@ struct GameView: View {
         print("cards\(cards)")
     }
     //add
+    func levHintValue(index: Int) -> String {
+        let number = cards[index]
+        var smallNumber = 0
+        if number >= 8 {
+            smallNumber = 8
+        } else if number >= 4 {
+            smallNumber = number - 1
+        } else if number == 2 || number == 3 {
+            smallNumber = 2
+        }
+        let hintString = "\(smallNumber)+"
+        return hintString
+    }
+
     func chooseRandomValue(index: Int) -> String {
         let number = cards[index]
         var smallNumber = 0
@@ -300,5 +332,7 @@ struct GameView: View {
 }
 
 #Preview {
-    GameView()
+    @State var isLev1 = false
+    @State var isLev2 = false
+    return GameView(isLev1: $isLev1, isLev2: $isLev2)
 }
