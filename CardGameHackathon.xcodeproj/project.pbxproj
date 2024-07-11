@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		53209A3E2C401E9600C042E6 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 53209A3D2C401E9600C042E6 /* Launch Screen.storyboard */; };
 		534B9DF72C2CCFDB00EE46A5 /* ScoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534B9DF62C2CCFDB00EE46A5 /* ScoreView.swift */; };
 		53504FD42C3FF304009CE518 /* StartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53504FD32C3FF304009CE518 /* StartView.swift */; };
 		5350D6812C21B140003012A8 /* CardGameHackathonApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5350D6802C21B13F003012A8 /* CardGameHackathonApp.swift */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		53209A3D2C401E9600C042E6 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		534B9DF62C2CCFDB00EE46A5 /* ScoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreView.swift; sourceTree = "<group>"; };
 		53504FD32C3FF304009CE518 /* StartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartView.swift; sourceTree = "<group>"; };
 		5350D67D2C21B13F003012A8 /* CardGameHackathon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CardGameHackathon.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -64,6 +66,7 @@
 				538E5F642C28CB6800065D5B /* FlipView.swift */,
 				5350D6842C21B141003012A8 /* Assets.xcassets */,
 				5350D6862C21B141003012A8 /* Preview Content */,
+				53209A3D2C401E9600C042E6 /* Launch Screen.storyboard */,
 			);
 			path = CardGameHackathon;
 			sourceTree = "<group>";
@@ -134,6 +137,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				53209A3E2C401E9600C042E6 /* Launch Screen.storyboard in Resources */,
 				5350D6882C21B141003012A8 /* Preview Assets.xcassets in Resources */,
 				5350D6852C21B141003012A8 /* Assets.xcassets in Resources */,
 			);
@@ -290,6 +294,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -319,6 +324,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
