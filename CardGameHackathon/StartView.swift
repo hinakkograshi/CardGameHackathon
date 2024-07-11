@@ -12,7 +12,7 @@ struct StartView: View {
     @State var showGameView = false
     @State var isLev1 = false
     @State var isLev2 = false
-    @State var isLev3 = false
+//    @State var isLev3 = false
     var body: some View {
         VStack {
             Text("Game Start")
@@ -54,7 +54,7 @@ struct StartView: View {
 
             Button {
                 showGameView = true
-                isLev3 = true
+//                isLev3 = true
             } label: {
                 Text("Lv.3 Game Start")
                     .fontWeight(.bold)
@@ -68,7 +68,7 @@ struct StartView: View {
             }
         }
         .fullScreenCover(isPresented: $showGameView, content: {
-            GameView(isLev1: $isLev1, isLev2: $isLev2, isLev3: $isLev3)
+            GameView(isLev1: $isLev1, isLev2: $isLev2)
         })
     }
 }
