@@ -109,7 +109,7 @@ struct GameView: View {
                                             } else {
                                                 endGame = true
                                                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                                                    showJokerView = true
+                                                    showSuccessView = true
                                                 }
                                             }
                                             // 全部trueかどうか🟥
