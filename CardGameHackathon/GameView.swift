@@ -7,12 +7,12 @@
 
 import SwiftUI
 
-struct ContentView: View {
-    @State var cards = ["2", "3", "4", "5", "6", "7", "8", "9", "10"]
+struct GameView: View {
+    @State var cards = [2, 3, 4, 5, 6, 7, 8, 9, 10]
     @State var movies: [Bool] = Array(repeating: false, count: 9)
     @State var sum = 0
     @State var showSumView = false
-    @State var showJockerView = false
+    @State var showJokerView = false
     @State var showSuccessView = false
     @State var ans: String = ""
     @State var plusHint: String = ""
@@ -27,6 +27,7 @@ struct ContentView: View {
     @State var indexNumPlus = 0
     @State var indexNumSearch = 0
     @State var isSuccess = true
+    @State var endGame = false
     @AppStorage("Total") var totalScore = 0
 
 
@@ -89,8 +90,8 @@ struct ContentView: View {
                                     // めくる
                                     if movies[index] == false, abilityMode == false, plusHintMode == false, searchHintMode == false {
                                         movies[index] = true
-                                        if cards[index] != "10" {
-                                            sum += Int(cards[index]) ?? 0
+                                        if cards[index] != 10 {
+                                            sum += cards[index]
                                         } else {
                                             movies.forEach { bool in
                                                 if bool == false {
@@ -98,14 +99,20 @@ struct ContentView: View {
                                                 }
                                             }
                                             if isSuccess == false {
-                                                showJockerView = true
+                                                endGame = true
+                                                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                                                    showJokerView = true
+                                                }
                                             } else {
-                                                showSuccessView = true
+                                                endGame = true
+                                                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                                                    showJokerView = true
+                                                }
                                             }
                                             // 全部trueかどうか🟥
                                             DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
                                                 showSuccessView = false
-                                                showJockerView = false
+                                                showJokerView = false
                                                 showSumView = true
                                             }
                                         }
@@ -128,7 +135,7 @@ struct ContentView: View {
                                     // 🟥Search
                                     if searchHintMode == true, movies[index] == false {
                                         indexNumSearch = index
-                                        searchHint = cards[index]
+                                        searchHint = String(cards[index])
                                         searchHintMode = false
                                     }
                                     //左縦
@@ -142,7 +149,6 @@ struct ContentView: View {
                                         thirdButtonEnable = false
                                     }
                                 } label: {
-
                                     Flip(isFront: movies[index],
                                          front: {
                                         Image("card\(cards[index])") // front
@@ -156,6 +162,7 @@ struct ContentView: View {
                                             .frame(width: 120, height: 160)
                                     })
                                 }
+                                .disabled(endGame)
                                 if ans != "" {
                                     if index == indexNumBigSmall {
                                         Text(ans)
@@ -204,8 +211,8 @@ struct ContentView: View {
                         .font(.title3)
                 }
             }
-            if showJockerView == true {
-                Image("jocker")
+            if showJokerView == true {
+                Image("joker")
                     .resizable()
                     .scaledToFill()
             }
@@ -230,6 +237,7 @@ struct ContentView: View {
     func reset() {
         movies = Array(repeating: false, count: 9)
         cards.shuffle()
+        endGame = false
         sum = 0
         firstButtonEnable = true
         secondButtonEnable = true
@@ -249,7 +257,7 @@ struct ContentView: View {
     }
     //add
     func chooseRandomValue(index: Int) -> String {
-        let number = Int(cards[index])!
+        let number = cards[index]
         var smallNumber = 0
         if number >= 5 {
             smallNumber = number - 3
@@ -267,6 +275,8 @@ struct ContentView: View {
         var returnString = ""
         if index == 0 || index == 3 || index == 6 {
             if cards[index] > cards[index+1] {
+                print("\(cards[index])")
+                print("\(cards[index+1])")
                 returnString = ">"
             } else {
                 returnString = "<"
@@ -274,7 +284,7 @@ struct ContentView: View {
         } else if index == 1 || index == 4 || index == 7 {
             if cards[index] > cards[index+1] {
                 returnString = ">"
-
+                returnString = ">"
             } else {
                 returnString = "<"
             }
@@ -290,5 +300,5 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    GameView()
 }
