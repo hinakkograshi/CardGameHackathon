@@ -1,3 +1,28 @@
+# Joker Card Game
+トランプカードゲームミニアプリです。
+
+Jokerねこのカードをめくらないようにヒントを使いながらカードをめくり、得点を増やしていきましょう！
+2~9の数字のトランプを引くとそのトランプの数字が獲得点数となります。縦一列を揃えるとヒントボタンを使用することができます。
+
+## AppStore
+Joker Card Game
+
+[https://apps.apple.com/jp/app/%E3%83%9D%E3%82%B8%E3%82%B3%E3%83%AC-positivewordscollection/id6511249150](https://apps.apple.com/jp/app/joker-card-game/id6532621202)
+## Framework
+SwiftUI
+
+## アプリアイデア
+2週間のオンラインハッカソンのアイデアを元にアプリをリリースしました。
+
+## ハッカソン受賞
+| 最優秀賞 | 観客投票賞 |　審査員賞 |
+| ------------- | ------------- | ------------- |
+| ![GrandWinner](https://github.com/user-attachments/assets/ab7abba1-4fb1-422a-8b99-6e1843d7f23a) | ![AudienceAward](https://github.com/user-attachments/assets/e98015e8-6b87-41b6-a9d8-90e5a890928b) | ![AVIEAward](https://github.com/user-attachments/assets/4e7a9f74-e2f3-4d76-87eb-ad5b6fffb9c3) |
+
+## 今後の課題
+設計やテストコードを意識したコードにリファクタリングしたい！
+
+
 # Jo-ka? for iOS
 #### MeltingHack Sprint #2 - Team Swift Submission
 
