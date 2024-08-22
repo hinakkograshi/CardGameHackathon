@@ -31,14 +31,26 @@ struct GameView: View {
     @State var isSuccess = true
     @State var endGame = false
     @AppStorage("Total") var totalScore = 0
-    
+    @Environment(\.openURL) private var openURL
     var body: some View {
         ZStack {
             Color.green
                 .ignoresSafeArea()
             VStack {
+                HStack {
+                    Spacer()
+                    Button {
+                        if let url = URL(string: "https://hiyokkograshi.com/jocker-card-game%e6%93%8d%e4%bd%9c%e8%aa%ac%e6%98%8e/") {
+                            openURL(url)
+                        }
+                    } label: {
+                        Image(systemName: "questionmark.circle")
+                            .font(.title)
+                    }
+                }.padding(10)
+                    .foregroundColor(.blue)
                 Text("This Game Score:\(sum)")
-                    .font(.largeTitle)
+                    .font(.title)
                     .padding(.bottom, 8)
                 HStack {
                     Spacer()
@@ -65,7 +77,6 @@ struct GameView: View {
                     })
                     .disabled(secondButtonEnable)
                     Spacer()
-                    
                     // Third
                     Button(action: {
                         searchHintMode = true
@@ -221,6 +232,7 @@ struct GameView: View {
                         }
                     }
                 })
+                Spacer()
                 if abilityMode == true {
                     Text("Tap on a flipped card.")
                         .foregroundStyle(.red)
@@ -273,62 +285,6 @@ struct GameView: View {
         searchHint = ""
         print("cards\(cards)")
     }
-//    //add
-//    func levHintValue(index: Int) -> String {
-//        let number = cards[index]
-//        var smallNumber = 0
-//        if number >= 8 {
-//            smallNumber = 8
-//        } else if number >= 4 {
-//            smallNumber = number - 1
-//        } else if number == 2 || number == 3 {
-//            smallNumber = 2
-//        }
-//        let hintString = "\(smallNumber)+"
-//        return hintString
-//    }
-//    
-//    func chooseRandomValue(index: Int) -> String {
-//        let number = cards[index]
-//        var smallNumber = 0
-//        if number >= 5 {
-//            smallNumber = number - 3
-//        } else if number == 2 {
-//            smallNumber = 1
-//        }else {
-//            smallNumber = 2
-//        }
-//        let randomValue = Int.random(in: smallNumber..<number)
-//        let randomString = String(randomValue)
-//        let hintString = "\(randomString)+"
-//        return hintString
-//    }
-//    func chooseBigSmall(index: Int) -> String {
-//        var returnString = ""
-//        if index == 0 || index == 3 || index == 6 {
-//            if cards[index] > cards[index+1] {
-//                print("\(cards[index])")
-//                print("\(cards[index+1])")
-//                returnString = ">"
-//            } else {
-//                returnString = "<"
-//            }
-//        } else if index == 1 || index == 4 || index == 7 {
-//            if cards[index] > cards[index+1] {
-//                returnString = ">"
-//                returnString = ">"
-//            } else {
-//                returnString = "<"
-//            }
-//        } else if index == 2 || index == 5 || index == 8 {
-//            if cards[index-1] < cards[index] {
-//                returnString = "<"
-//            } else {
-//                returnString = ">"
-//            }
-//        }
-//        return returnString
-//    }
 }
 
 #Preview {
