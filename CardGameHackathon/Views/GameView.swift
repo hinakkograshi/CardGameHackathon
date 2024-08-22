@@ -31,21 +31,33 @@ struct GameView: View {
     @State var isSuccess = true
     @State var endGame = false
     @AppStorage("Total") var totalScore = 0
-
+    @Environment(\.openURL) private var openURL
     var body: some View {
         ZStack {
             Color.green
                 .ignoresSafeArea()
             VStack {
+                HStack {
+                    Spacer()
+                    Button {
+                        if let url = URL(string: "https://hiyokkograshi.com/jocker-card-game%e6%93%8d%e4%bd%9c%e8%aa%ac%e6%98%8e/") {
+                            openURL(url)
+                        }
+                    } label: {
+                        Image(systemName: "questionmark.circle")
+                            .font(.title)
+                    }
+                }.padding(10)
+                    .foregroundColor(.blue)
                 Text("This Game Score:\(sum)")
-                    .font(.largeTitle)
+                    .font(.title)
                     .padding(.bottom, 8)
                 HStack {
                     Spacer()
                     // First
                     Button(action: {
                         abilityMode = true
-
+                        
                     }, label: {
                         Text("<>")
                             .border(.primary)
@@ -53,11 +65,11 @@ struct GameView: View {
                     })
                     .disabled(firstButtonEnable)
                     Spacer()
-
+                    
                     // Second
                     Button(action: {
                         plusHintMode = true
-
+                        
                     }, label: {
                         Image(systemName: "plus")
                             .border(.primary)
@@ -65,11 +77,10 @@ struct GameView: View {
                     })
                     .disabled(secondButtonEnable)
                     Spacer()
-
                     // Third
                     Button(action: {
                         searchHintMode = true
-
+                        
                     }, label: {
                         Image(systemName: "magnifyingglass")
                             .font(.largeTitle)
@@ -123,15 +134,15 @@ struct GameView: View {
                                     // <>
                                     if abilityMode == true, movies[index] == true {
                                         indexNumBigSmall = index
-                                        ans = chooseBigSmall(index: index)
+                                        ans = GameLogic.chooseBigSmall(index: index, cards: cards)
                                         print(ans)
                                         abilityMode = false
                                     }
-
+                                    
                                     // Num+
                                     if plusHintMode == true, movies[index] == false {
                                         indexNumPlus = index
-                                        plusHint = chooseRandomValue(index: index)
+                                        plusHint = GameLogic.chooseRandomValue(index: index, cards: cards)
                                         print(plusHint)
                                         plusHintMode = false
                                     }
@@ -157,7 +168,7 @@ struct GameView: View {
                                         Image("card\(cards[index])") // front
                                             .resizable()
                                             .frame(width: 120, height: 160)
-
+                                        
                                     },
                                          back: {
                                         Image("back") // back
@@ -200,27 +211,28 @@ struct GameView: View {
                                     }
                                 }
                                 if isLev1 == true , index == 0 || index == 5 || index == 7 {
-                                        Text(levHintValue(index: index))
-                                            .font(.title)
-                                            .foregroundStyle(.white)
-                                            .padding()
-                                            .frame(width: 70, height: 70)
-                                            .background(.blue)
-                                            .clipShape(RoundedRectangle(cornerRadius: 12))
+                                    Text(GameLogic.levHintValue(index: index, cards: cards))
+                                        .font(.title)
+                                        .foregroundStyle(.white)
+                                        .padding()
+                                        .frame(width: 70, height: 70)
+                                        .background(.blue)
+                                        .clipShape(RoundedRectangle(cornerRadius: 12))
                                 }
                                 if isLev2 == true , index == 3 || index == 8 {
-                                        Text(levHintValue(index: index))
-                                            .font(.title)
-                                            .foregroundStyle(.white)
-                                            .padding()
-                                            .frame(width: 70, height: 70)
-                                            .background(.blue)
-                                            .clipShape(RoundedRectangle(cornerRadius: 12))
+                                    Text(GameLogic.levHintValue(index: index, cards: cards))
+                                        .font(.title)
+                                        .foregroundStyle(.white)
+                                        .padding()
+                                        .frame(width: 70, height: 70)
+                                        .background(.blue)
+                                        .clipShape(RoundedRectangle(cornerRadius: 12))
                                 }
                             }
                         }
                     }
                 })
+                Spacer()
                 if abilityMode == true {
                     Text("Tap on a flipped card.")
                         .foregroundStyle(.red)
@@ -272,62 +284,6 @@ struct GameView: View {
         plusHint = ""
         searchHint = ""
         print("cards\(cards)")
-    }
-    //add
-    func levHintValue(index: Int) -> String {
-        let number = cards[index]
-        var smallNumber = 0
-        if number >= 8 {
-            smallNumber = 8
-        } else if number >= 4 {
-            smallNumber = number - 1
-        } else if number == 2 || number == 3 {
-            smallNumber = 2
-        }
-        let hintString = "\(smallNumber)+"
-        return hintString
-    }
-
-    func chooseRandomValue(index: Int) -> String {
-        let number = cards[index]
-        var smallNumber = 0
-        if number >= 5 {
-            smallNumber = number - 3
-        } else if number == 2 {
-            smallNumber = 1
-        }else {
-            smallNumber = 2
-        }
-        let randomValue = Int.random(in: smallNumber..<number)
-        let randomString = String(randomValue)
-        let hintString = "\(randomString)+"
-        return hintString
-    }
-    func chooseBigSmall(index: Int) -> String {
-        var returnString = ""
-        if index == 0 || index == 3 || index == 6 {
-            if cards[index] > cards[index+1] {
-                print("\(cards[index])")
-                print("\(cards[index+1])")
-                returnString = ">"
-            } else {
-                returnString = "<"
-            }
-        } else if index == 1 || index == 4 || index == 7 {
-            if cards[index] > cards[index+1] {
-                returnString = ">"
-                returnString = ">"
-            } else {
-                returnString = "<"
-            }
-        } else if index == 2 || index == 5 || index == 8 {
-            if cards[index-1] < cards[index] {
-                returnString = "<"
-            } else {
-                returnString = ">"
-            }
-        }
-        return returnString
     }
 }
 
