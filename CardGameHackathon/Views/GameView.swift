@@ -186,6 +186,7 @@ struct GameView: View {
                                             .frame(width: 70, height: 70)
                                             .background(.blue)
                                             .clipShape(RoundedRectangle(cornerRadius: 12))
+                                            .allowsHitTesting(false)
                                     }
                                 }
                                 if plusHint != "" {
@@ -197,6 +198,7 @@ struct GameView: View {
                                             .frame(width: 70, height: 70)
                                             .background(.blue)
                                             .clipShape(RoundedRectangle(cornerRadius: 12))
+                                            .allowsHitTesting(false)
                                     }
                                 }
                                 if searchHint != "" {
@@ -208,6 +210,7 @@ struct GameView: View {
                                             .frame(width: 70, height: 70)
                                             .background(.blue)
                                             .clipShape(RoundedRectangle(cornerRadius: 12))
+                                            .allowsHitTesting(false)
                                     }
                                 }
                                 if isLev1 == true , index == 0 || index == 5 || index == 7 {
@@ -218,6 +221,7 @@ struct GameView: View {
                                         .frame(width: 70, height: 70)
                                         .background(.blue)
                                         .clipShape(RoundedRectangle(cornerRadius: 12))
+                                        .allowsHitTesting(false)
                                 }
                                 if isLev2 == true , index == 3 || index == 8 {
                                     Text(GameLogic.levHintValue(index: index, cards: cards))
@@ -227,6 +231,7 @@ struct GameView: View {
                                         .frame(width: 70, height: 70)
                                         .background(.blue)
                                         .clipShape(RoundedRectangle(cornerRadius: 12))
+                                        .allowsHitTesting(false)
                                 }
                             }
                         }
