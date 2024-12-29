@@ -234,12 +234,12 @@ struct GameView: View {
                 })
                 Spacer()
                 if abilityMode == true {
-                    Text("Tap on a flipped card.")
+                    Text("表面のカードをタップ")
                         .foregroundStyle(.red)
                         .font(.title3)
                 }
                 if plusHintMode == true || searchHintMode == true {
-                    Text("Tap on an unflipped card.")
+                    Text("裏面のカードをタップ")
                         .foregroundStyle(.red)
                         .font(.title3)
                 }
