@@ -64,7 +64,7 @@ struct StartView: View {
                     .foregroundStyle(.pink)
             }
             Button {
-                if let url = URL(string: "https://hiyokkograshi.com/jocker-card-game%e6%93%8d%e4%bd%9c%e8%aa%ac%e6%98%8e/") {
+                if let url = URL(string: "https://www.notion.so/Joker-Card-Game-2a6912abf85a80b681d8f9089fa820de") {
                     openURL(url)
                 }
             } label: {
